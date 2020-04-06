@@ -6,7 +6,7 @@ import {prepareQuery} from "../database/queries";
 export const router = express.Router();
 
 router.get('/', (req, res) => {
-    const sql = prepareQuery('employees');
+    const sql = prepareQuery('locations');
     const connection = mysql.createConnection(connectionConfig);
     connection.connect();
     connection.query(sql, (err, results, fields) => {
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', ((req, res) => {
-    const sql = prepareQuery('employees', req.params.id);
+    const sql = prepareQuery('locations', req.params.id);
     const connection = mysql.createConnection(connectionConfig);
     connection.connect();
     connection.query(sql, (err, results, fields) => {
