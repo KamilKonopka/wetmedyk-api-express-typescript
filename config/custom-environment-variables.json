@@ -1,0 +1,8 @@
+{
+  "name": "WetMedyk API",
+  "database": {
+    "password": "db_password",
+    "username": "db_username",
+    "hostname": "db_hostname"
+  }
+}
