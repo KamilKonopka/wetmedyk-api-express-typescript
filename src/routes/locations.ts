@@ -1,45 +1,26 @@
 import express from 'express';
-import { connectionConfig } from "../database/mysql-db";
-import mysql from 'mysql';
 import {prepareQuery} from "../database/queries";
-import * as _ from "lodash";
+import {MysqlDb} from "../database/mysql-db";
 
 export const router = express.Router();
+export const routePath = 'locations';
 
 router.get('/', (req, res) => {
-    const sql = prepareQuery('locations');
-    const connection = mysql.createConnection(connectionConfig);
-    connection.connect();
-    connection.query(sql, (err, results: { [key: string]: string | number }[], fields) => {
-        if (err) {
-            return new Error(err.message);
-        } else {
-
-            return results ? res.send(results) : res.status(404).send('Posts not found');
-        }
+    const sql = `SELECT * FROM wp_${routePath};`;
+    const connection = new MysqlDb().createConnection();
+    connection.query(sql, (err, result, fields) => {
+        connection.end();
+        return err ? res.status(404).send(err.message) : res.status(200).send(result);
     });
-    connection.end();
 });
 
 router.get('/:id', ((req, res) => {
-    const sql = prepareQuery('locations', req.params.id);
-    const connection = mysql.createConnection(connectionConfig);
-    connection.connect();
-    connection.query(sql, (err, results, fields) => {
-        if (err) {
-            return new Error(err.message);
-        } else {
-            return results.length ? res.send(results.shift()) : res.status(404).send('Employee not found');
-        }
+    const connection = new MysqlDb().createConnection();
+    const sql = connection.format(`SELECT * FROM wp_${routePath} WHERE ID=?;`, [req.params.id]);
+
+    connection.query(sql, (err, result, fields) => {
+        connection.end();
+        return err ? res.status(404).send(err.message) : res.status(200).send(result);
     });
-    connection.end();
 }));
 
-// export function mapFieldsIntoCamelCase (results: { [key: string]: string | number }[]): object[] {
-//     return results.map((el: { [key: string]: string | number }) => {
-//         return Object.entries(el).reduce((obj: {}, [key, value]) => {
-//             obj[key] = value;
-//             return obj;
-//         }, {});
-//     });
-// }
