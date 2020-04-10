@@ -1,6 +1,6 @@
 import express from 'express';
 import {MysqlDb} from "../database/mysql-db";
-import {mapValues, prepareMysqlQuery} from "../database/queries";
+import {mapValues, prepareGetMysqlQuery} from "../database/queries";
 import * as _ from "lodash";
 
 export const router = express.Router();
@@ -8,7 +8,7 @@ const routePath = 'employees';
 
 router.get('/', (req, res) => {
     const connection = new MysqlDb().createConnection();
-    const query = prepareMysqlQuery(routePath, req.params, req.query);
+    const query = prepareGetMysqlQuery(routePath, req.params, req.query);
     const values = mapValues(_.merge(req.params, req.query));
     const sql = connection.format(query, values);
     connection.query(sql, (err, result, fields) => {
@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 router.get('/:ID', ((req, res) => {
     const connection = new MysqlDb().createConnection();
-    const query = prepareMysqlQuery(routePath, req.params, req.query);
+    const query = prepareGetMysqlQuery(routePath, req.params, req.query);
     const values = mapValues(_.merge(req.params, req.query));
     const sql = connection.format(query, values);
     connection.query(sql, (err, result, fields) => {

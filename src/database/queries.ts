@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import {StringObject} from "../models/string-object.model";
 
-export const prepareMysqlQuery = (table: string, params: StringObject, queryParams: StringObject): string => {
+export const prepareGetMysqlQuery = (table: string, params: StringObject, queryParams: StringObject): string => {
     const queryStart = `SELECT * FROM wp_${table}`;
     let sqlQuery: string[] = [queryStart];
 
