@@ -1,11 +1,13 @@
 import express from 'express';
 import {MysqlDb} from "../database/mysql-db";
 import * as _ from 'lodash';
+import {prepareMysqlQuery} from "../database/queries";
 
 export const router = express.Router();
+const routePath = 'posts';
 
 router.get('/', (req, res) => {
-    const sql = 'SELECT * from wp_posts WHERE post_mime_type != "image/jpeg" AND post_status="publish" AND post_type="page"; ';
+    const sql = prepareMysqlQuery(routePath, req.params, req.query);
     const connection = new MysqlDb().createConnection();
     connection.query(sql, (err, result, fields) => {
         connection.end();
