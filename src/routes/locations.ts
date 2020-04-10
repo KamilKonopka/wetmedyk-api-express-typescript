@@ -1,14 +1,16 @@
 import express from 'express';
 import {MysqlDb} from "../database/mysql-db";
-import {prepareMysqlQuery} from "../database/queries";
+import {mapValues, prepareMysqlQuery} from "../database/queries";
+import * as _ from "lodash";
 
 export const router = express.Router();
 export const routePath = 'locations';
 
 router.get('/', (req, res) => {
-    // const sql = `SELECT * FROM wp_${routePath};`;
-    const sql = prepareMysqlQuery(routePath, {}, req.query);
     const connection = new MysqlDb().createConnection();
+    const query = prepareMysqlQuery(routePath, req.params, req.query);
+    const values = mapValues(_.merge(req.params, req.query));
+    const sql = connection.format(query, values);
     connection.query(sql, (err, result, fields) => {
         connection.end();
         return err ? res.status(404).send(err.message) : res.status(200).send(result);
@@ -17,9 +19,9 @@ router.get('/', (req, res) => {
 
 router.get('/:ID', ((req, res) => {
     const connection = new MysqlDb().createConnection();
-    const sql = prepareMysqlQuery(routePath, req.params, {});
-    // const sql = connection.format(`SELECT * FROM wp_${routePath} WHERE ID=?;`, [req.params.id]);
-
+    const query = prepareMysqlQuery(routePath, req.params, req.query);
+    const values = mapValues(_.merge(req.params, req.query));
+    const sql = connection.format(query, values);
     connection.query(sql, (err, result, fields) => {
         connection.end();
         return err ? res.status(404).send(err.message) : res.status(200).send(result);

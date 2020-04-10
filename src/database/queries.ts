@@ -1,30 +1,30 @@
 import * as _ from "lodash";
+import {StringObject} from "../models/string-object.model";
 
-export const prepareMysqlQuery =
-    (table: string, params: { [key: string]: string }, queryParams: { [key: string]: string }): string => {
+export const prepareMysqlQuery = (table: string, params: StringObject, queryParams: StringObject): string => {
     const queryStart = `SELECT * FROM wp_${table}`;
-    const queryEnd = ';';
-    const sqlQuery: string[] = [queryStart];
+    let sqlQuery: string[] = [queryStart];
 
-    if (!_.isEmpty(params) && !_.isEmpty(queryParams)) {
-        sqlQuery.push('WHERE', mapParams(params), 'AND', mapParams(queryParams));
-    } else if (!_.isEmpty(queryParams) && _.isEmpty(params)) {
-        sqlQuery.push('WHERE', mapParams(queryParams));
-    } else if (_.isEmpty(queryParams) && !_.isEmpty(params)) {
-        sqlQuery.push('WHERE', mapParams(params));
+    if (!_.isEmpty(params)) {
+        sqlQuery = [...sqlQuery, 'WHERE', mapParams(params)];
+        if (!_.isEmpty(queryParams)) {
+            sqlQuery = [...sqlQuery, 'AND', mapParams(queryParams)];
+        }
+    } else if (!_.isEmpty(queryParams)) {
+        sqlQuery = [...sqlQuery, 'WHERE', mapParams(queryParams)];
     }
-    sqlQuery.push(queryEnd);
-    return sqlQuery.join(' ');
+    return `${sqlQuery.join(' ')};`;
 };
 
-export function mapParams(object: { [key: string]: string }): string {
+export function mapParams(object: StringObject): string {
     let paramsToQuery = '';
-    Object.entries(object).forEach(([key, value], index) => {
-        if (index === 0) {
-            paramsToQuery += `${key}="${value}"`;
-        } else {
-            paramsToQuery += ` AND ${key}="${value}"`
-        }
-    });
+    Object.keys(object).forEach((key, index) =>
+        index === 0 ? paramsToQuery += `${key}=?` : paramsToQuery += ` AND ${key}=?`);
     return paramsToQuery;
+}
+
+export function mapValues(object: StringObject): string[] {
+    return Object.values(object).map((value: string) => {
+        return value;
+    });
 }
