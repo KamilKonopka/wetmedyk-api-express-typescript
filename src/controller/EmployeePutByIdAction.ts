@@ -4,7 +4,9 @@ import { Employee } from "../entities/Employee";
 
 export async function employeePutByIdAction(request: Request, response: Response) {
     const putRepository = getManager().getRepository(Employee);
-    const newPut = await putRepository.update(request.params.id, request.body);
+    const employee = await putRepository.findOne(request.params.id);
+    putRepository.merge(employee, request.body);
+    const result = await putRepository.save(employee);
 
-    response.send(newPut);
+    response.send(result);
 }

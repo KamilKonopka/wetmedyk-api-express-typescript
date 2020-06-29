@@ -43,7 +43,7 @@ if (app.get('env') === 'development') {
 }
 
 app.get('/', (req, res) => {
-    res.send('Test');
+    res.send('WetMedyk Rest API');
 });
 
 console.log(`${config.get('name')}: in ${_.startCase(env.get('NODE_ENV').asString())}`);
