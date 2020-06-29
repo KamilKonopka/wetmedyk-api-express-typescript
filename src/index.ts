@@ -4,15 +4,14 @@ import config from 'config';
 import * as env from 'env-var';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { router as posts } from './routes/posts';
-import { router as employees } from './routes/employees';
-import { router as locations } from './routes/locations';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { router as pages } from './routes/pages';
 import debug from 'debug';
 import Joi from 'joi';
 import * as _ from 'lodash';
+import { AppRoutes } from "./routes.js";
+import { createConnection } from "typeorm";
+import { Response, Request } from "express";
 
 dotenv.config();
 
@@ -25,10 +24,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(bodyParser.json());
-app.use('/posts', posts);
-app.use('/employees', employees);
-app.use('/locations', locations);
-app.use('/pages', pages);
+
+createConnection().then(async connection => {
+    AppRoutes.forEach((route) => {
+        // @ts-ignore
+        // tslint:disable-next-line:ban-types
+        app[route.method](route.path, (request: Request, response: Response, next:Function) => {
+            route.action(request, response)
+                .then(() => next)
+                .catch(err => next(err));
+        });
+    });
+});
 
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'));

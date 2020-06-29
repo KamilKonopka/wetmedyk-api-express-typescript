@@ -1,8 +1,8 @@
-export interface Employee {
-    id: string;
+export interface IEmployee {
+    ID: number;
     firstName: string;
     lastName: string;
     title: string;
-    image: string;
+    photo: string;
     description: string;
 }
