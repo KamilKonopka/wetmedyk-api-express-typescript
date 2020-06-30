@@ -3,8 +3,11 @@ import { employeeGetByIdAction } from "./controller/EmployeeGetByIdAction.js";
 import { employeePostAction } from "./controller/EmployeePostAction.js";
 import { employeeDeleteByIdAction } from "./controller/EmployeeDeleteByIdAction";
 import { employeePutByIdAction } from "./controller/employeePutByIdAction";
+import { locationGetAllAction } from "./controller/LocationGetAllAction";
+import { locationGetByIdAction } from "./controller/LocationGetByIdAction";
 
 const EMPLOYEE_ROUTE = '/employees';
+const LOCATION_ROUTE = '/locations';
 
 export const AppRoutes = [
     {
@@ -31,5 +34,15 @@ export const AppRoutes = [
         path: `${EMPLOYEE_ROUTE}/:id`,
         method: 'put',
         action: employeePutByIdAction,
+    },
+    {
+        path: LOCATION_ROUTE,
+        method: 'get',
+        action: locationGetAllAction,
+    },
+    {
+        path: `${LOCATION_ROUTE}/:id`,
+        method: 'get',
+        action: locationGetByIdAction,
     }
 ];
