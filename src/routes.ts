@@ -5,6 +5,9 @@ import { employeeDeleteByIdAction } from "./controller/EmployeeDeleteByIdAction"
 import { employeePutByIdAction } from "./controller/employeePutByIdAction";
 import { locationGetAllAction } from "./controller/LocationGetAllAction";
 import { locationGetByIdAction } from "./controller/LocationGetByIdAction";
+import { locationPostAction } from "./controller/LocationPostAction";
+import { locationPutById } from "./controller/LocationPutByIdAction";
+import { locationDeleteById } from "./controller/LocationDeleteByIdAction";
 
 const EMPLOYEE_ROUTE = '/employees';
 const LOCATION_ROUTE = '/locations';
@@ -44,5 +47,20 @@ export const AppRoutes = [
         path: `${LOCATION_ROUTE}/:id`,
         method: 'get',
         action: locationGetByIdAction,
+    },
+    {
+        path: LOCATION_ROUTE,
+        method: 'post',
+        action: locationPostAction,
+    },
+    {
+        path: `${LOCATION_ROUTE}/:id`,
+        method: 'put',
+        action: locationPutById,
+    },
+    {
+        path: `${LOCATION_ROUTE}/:id`,
+        method: 'delete',
+        action: locationDeleteById,
     }
 ];
