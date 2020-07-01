@@ -3,10 +3,10 @@ import { Employee } from "../entities/Employee.js";
 import { Response, Request } from "express";
 
 export async function employeePostAction(request: Request, response: Response) {
-    const postRepository = getManager().getRepository(Employee);
-    const newPost = postRepository.create(request.body);
+    const employeeRepository = getManager().getRepository(Employee);
+    const newPost = employeeRepository.create(request.body);
 
-    await postRepository.save(newPost);
+    await employeeRepository.save(newPost);
 
     response.send(newPost);
 }

@@ -10,5 +10,5 @@ export async function locationPutById(request: Request, response: Response) {
 
     const result = await locationsRepository.save(location);
 
-    response.send(result);
+    response.status(200).send(result);
 }
