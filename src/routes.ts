@@ -9,6 +9,10 @@ import { locationPostAction } from "./controller/LocationPostAction";
 import { locationPutById } from "./controller/LocationPutByIdAction";
 import { locationDeleteById } from "./controller/LocationDeleteByIdAction";
 import { postGetAllAction } from "./controller/PostGetAllAction.js";
+import { postGetByIdAction } from "./controller/PostGetByIdAction";
+import { postPostAction } from "./controller/PostPostAction";
+import { postPutByIdAction } from "./controller/PostPutByIdAction";
+import { postDeleteByIdAction } from "./controller/PostDeleteByIdAction";
 
 const EMPLOYEE_ROUTE = '/employees';
 const LOCATION_ROUTE = '/locations';
@@ -69,5 +73,25 @@ export const AppRoutes = [
         path: POST_ROUTE,
         method: 'get',
         action: postGetAllAction,
+    },
+    {
+        path: `${POST_ROUTE}/:id`,
+        method: 'get',
+        action: postGetByIdAction,
+    },
+    {
+        path: POST_ROUTE,
+        method: 'post',
+        action: postPostAction,
+    },
+    {
+        path: `${POST_ROUTE}/:id`,
+        method: 'put',
+        action: postPutByIdAction,
+    },
+    {
+        path: `${POST_ROUTE}/:id`,
+        method: 'delete',
+        action: postDeleteByIdAction,
     }
 ];
