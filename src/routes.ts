@@ -8,9 +8,11 @@ import { locationGetByIdAction } from "./controller/LocationGetByIdAction";
 import { locationPostAction } from "./controller/LocationPostAction";
 import { locationPutById } from "./controller/LocationPutByIdAction";
 import { locationDeleteById } from "./controller/LocationDeleteByIdAction";
+import { postGetAllAction } from "./controller/PostGetAllAction.js";
 
 const EMPLOYEE_ROUTE = '/employees';
 const LOCATION_ROUTE = '/locations';
+const POST_ROUTE = '/posts';
 
 export const AppRoutes = [
     {
@@ -62,5 +64,10 @@ export const AppRoutes = [
         path: `${LOCATION_ROUTE}/:id`,
         method: 'delete',
         action: locationDeleteById,
+    },
+    {
+        path: POST_ROUTE,
+        method: 'get',
+        action: postGetAllAction,
     }
 ];

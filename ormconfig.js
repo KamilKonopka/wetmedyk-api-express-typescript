@@ -10,7 +10,7 @@ module.exports = {
   "synchronize": true,
   "logging": false,
   "entities": [
-    "dist/entities/*.js"
+    "dist/entities/*{.js,.ts}"
   ],
   "migrations": [
     "dist/migration/*.js"
