@@ -13,6 +13,7 @@ import { postGetByIdAction } from "./controller/PostGetByIdAction";
 import { postPostAction } from "./controller/PostPostAction";
 import { postPutByIdAction } from "./controller/PostPutByIdAction";
 import { postDeleteByIdAction } from "./controller/PostDeleteByIdAction";
+import { filePostAction } from "./controller/FilePostAction";
 
 const EMPLOYEE_ROUTE = '/employees';
 const LOCATION_ROUTE = '/locations';
@@ -93,5 +94,10 @@ export const AppRoutes = [
         path: `${POST_ROUTE}/:id`,
         method: 'delete',
         action: postDeleteByIdAction,
+    },
+    {
+        path: '/upload',
+        method: 'post',
+        action: filePostAction,
     }
 ];
