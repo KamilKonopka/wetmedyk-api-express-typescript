@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import multer from "multer";
+import { imagePath } from "../index";
 
 const storage = multer.diskStorage({
     destination: (request, file, callback) => {
-        callback(null, 'public/images/');
+        callback(null, imagePath);
     },
     filename(req: Express.Request, file: Express.Multer.File, callback: (error: (Error | null), filename: string) => void) {
         callback(null, file.originalname);

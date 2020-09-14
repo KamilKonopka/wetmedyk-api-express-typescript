@@ -14,6 +14,7 @@ import { postPostAction } from "./controller/PostPostAction";
 import { postPutByIdAction } from "./controller/PostPutByIdAction";
 import { postDeleteByIdAction } from "./controller/PostDeleteByIdAction";
 import { filePostAction } from "./controller/FilePostAction";
+import { imagesGetAllNames } from "./controller/ImagesGetAllNames";
 
 const EMPLOYEE_ROUTE = '/employees';
 const LOCATION_ROUTE = '/locations';
@@ -99,5 +100,10 @@ export const AppRoutes = [
         path: '/upload',
         method: 'post',
         action: filePostAction,
+    },
+    {
+        path: '/images',
+        method: 'get',
+        action: imagesGetAllNames,
     }
 ];
