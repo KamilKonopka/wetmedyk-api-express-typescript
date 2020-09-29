@@ -12,6 +12,7 @@ import * as _ from 'lodash';
 import { AppRoutes } from "./routes.js";
 import { createConnection } from "typeorm";
 import { Response, Request } from "express";
+import { requireJwtMiddleware } from "./session/RequireJwtMiddleware";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(bodyParser.json());
+// app.use(requireJwtMiddleware);
 
 createConnection().then(async connection => {
     AppRoutes.forEach((route) => {
