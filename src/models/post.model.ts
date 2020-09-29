@@ -1,5 +1,5 @@
 export interface IPost {
-    ID: number;
+    id: number;
     author: string;
     date: string;
     dateGmt: string;

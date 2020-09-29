@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Location implements ILocation {
-    @PrimaryGeneratedColumn() ID: number;
+    @PrimaryGeneratedColumn() id: number;
 
     @Column() name: string;
 

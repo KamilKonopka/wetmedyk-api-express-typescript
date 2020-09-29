@@ -4,7 +4,7 @@ import { IEmployee } from "../models/employee.model";
 @Entity()
 export class Employee implements IEmployee {
 
-    @PrimaryGeneratedColumn() ID: number;
+    @PrimaryGeneratedColumn() id: number;
 
     @Column() firstName: string;
 

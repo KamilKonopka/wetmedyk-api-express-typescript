@@ -1,9 +1,9 @@
 const env = require("env-var");
 
 module.exports = {
-  "type": "mysql",
+  "type": "postgres",
   "host": env.get('DB_HOSTNAME').required().asString(),
-  "port": 3306,
+  "port": env.get('DB_PORT').required().asPortNumber(),
   "username": env.get('DB_USERNAME').required().asString(),
   "password": env.get('DB_PASSWORD').required().asString(),
   "database": env.get('DB_DATABASE').required().asString(),
