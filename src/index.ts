@@ -54,4 +54,3 @@ console.log(`${config.get('name')}: in ${_.startCase(env.get('NODE_ENV').asStrin
 app.listen(port, () => {
     console.log(`Listening to port ${port}`);
 });
-

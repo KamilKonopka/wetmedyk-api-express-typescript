@@ -15,6 +15,8 @@ import { postPutByIdAction } from "./controller/PostPutByIdAction";
 import { postDeleteByIdAction } from "./controller/PostDeleteByIdAction";
 import { filePostAction } from "./controller/FilePostAction";
 import { imagesGetAllNames } from "./controller/ImagesGetAllNames";
+import { authenticateAction } from "./controller/AuthenticateAction";
+import { authenticateGetSession } from "./controller/AuthenticateGetSession";
 
 const EMPLOYEE_ROUTE = '/employees';
 const LOCATION_ROUTE = '/locations';
@@ -105,5 +107,15 @@ export const AppRoutes = [
         path: '/images',
         method: 'get',
         action: imagesGetAllNames,
+    },
+    {
+        path: '/authenticate',
+        method: 'post',
+        action: authenticateAction,
+    },
+    {
+        path: '/authenticate',
+        method: 'get',
+        action: authenticateGetSession,
     }
 ];
