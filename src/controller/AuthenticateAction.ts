@@ -14,7 +14,6 @@ export const authenticateAction = async (req: Request, res: Response) => {
 
         if (passwordMatch) {
             const session = await encodeSession(SECRET_KEY, {
-                id: req.body.id,
                 userName: req.body.userName,
                 dateCreated: Date.now(),
             });

@@ -5,23 +5,23 @@ import { checkExpirationDate } from "./CheckExpirationStatus";
 import { encodeSession } from "./EncodeSession";
 import { SECRET_KEY } from "../index";
 
-export const requireJwtMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    const unauthorized = (message: string) => res.status(403).json({
+export const requireJwtMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+    const unauthorized = (message: string) => res.status(403).send({
         message,
         ok: false,
         status: 403,
     });
 
-    const requestHeader = "X-JWT-Token";
+    const requestHeader = "Authorization";
     const responseHeader = "X-Renewed-JWT-Token";
-    const header = req.header(requestHeader);
+    const [bearer, token] = req.header(requestHeader).split(' ');
 
-    if (!header) {
+    if (!token) {
         unauthorized(`Required ${requestHeader} header not found`);
         return;
     }
 
-    const decodedSession: DecodeResult = decodeSession(SECRET_KEY, header);
+    const decodedSession: DecodeResult = decodeSession(SECRET_KEY, token);
 
     if (decodedSession.type === 'integrity-error' || decodedSession.type === 'invalid-token') {
         unauthorized(`Failed to decode or validate authorization token. Reason: ${decodedSession.type}`);

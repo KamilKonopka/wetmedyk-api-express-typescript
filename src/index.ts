@@ -34,8 +34,9 @@ createConnection().then(async connection => {
     AppRoutes.forEach((route) => {
         // @ts-ignore
         // tslint:disable-next-line:ban-types
-        app[route.method](route.path, (request: Request, response: Response, next:Function) => {
-            route.action(request, response)
+        app[route.method](route.path, route.requireJwt ? requireJwtMiddleware : '', (request: Request, response: Response, next: Function) => {
+
+                route.action(request, response)
                 .then(() => next)
                 .catch(err => next(err));
         });
