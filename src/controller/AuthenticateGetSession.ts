@@ -2,7 +2,11 @@ import { Request, Response } from "express";
 import { Session } from "../models/session.model";
 
 export const authenticateGetSession = async (req: Request, res: Response) => {
-    const session: Session = !!res.locals?.session ? await res.locals.session : { userName: 'Not Logged In' };
+    const session: Session = await res.locals.session;
 
-    res.status(200).send({ message: `Your username is ${session.userName}` });
+    if (!session) {
+        res.status(403).send({ message: 'Not Logged In' });
+    } else {
+        res.status(200).send({ message: `Your username is ${session.userName}` });
+    }
 }

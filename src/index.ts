@@ -1,7 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import config from 'config';
-import * as env from 'env-var';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -13,12 +12,14 @@ import { AppRoutes } from "./routes.js";
 import { createConnection } from "typeorm";
 import { Response, Request } from "express";
 import { requireJwtMiddleware } from "./session/RequireJwtMiddleware";
+import env from 'env-var';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.SERVER_PORT || 8080;
 export const imagePath = 'public/images';
+export const SECRET_KEY = env.get('SECRET_KEY').required().asString();
 
 app.use(cors());
 app.use(helmet());
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 // app.use(requireJwtMiddleware);
+
 
 createConnection().then(async connection => {
     AppRoutes.forEach((route) => {
