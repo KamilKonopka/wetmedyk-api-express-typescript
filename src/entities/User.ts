@@ -9,6 +9,6 @@ export class User implements IUser {
 
     @Column() password: string;
 
-    @Column() dateCreated: number;
+    @Column() dateCreated: string;
 
 }

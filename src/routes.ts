@@ -17,6 +17,7 @@ import { filePostAction } from "./controller/FilePostAction";
 import { imagesGetAllNames } from "./controller/ImagesGetAllNames";
 import { authenticateAction } from "./controller/AuthenticateAction";
 import { authenticateGetSession } from "./controller/AuthenticateGetSession";
+import { createUserAction } from "./controller/CreateUserAction";
 
 const EMPLOYEE_ROUTE = '/employees';
 const LOCATION_ROUTE = '/locations';
@@ -117,5 +118,10 @@ export const AppRoutes = [
         path: '/authenticate',
         method: 'get',
         action: authenticateGetSession,
+    },
+    {
+        path: '/signup',
+        method: 'post',
+        action: createUserAction,
     }
 ];
