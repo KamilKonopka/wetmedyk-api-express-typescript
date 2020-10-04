@@ -18,6 +18,7 @@ import { imagesGetAllNames } from "./controller/ImagesGetAllNames";
 import { authenticateAction } from "./controller/AuthenticateAction";
 import { authenticateGetSession } from "./controller/AuthenticateGetSession";
 import { createUserAction } from "./controller/CreateUserAction";
+import { newsletterPostAction } from "./controller/NewsletterPostAction";
 
 const EMPLOYEE_ROUTE = '/employees';
 const LOCATION_ROUTE = '/locations';
@@ -28,13 +29,13 @@ export const AppRoutes = [
         path: EMPLOYEE_ROUTE,
         method: 'get',
         action: employeeGetAllAction,
-        requireJwt: true,
+        requireJwt: false,
     },
     {
         path: `${EMPLOYEE_ROUTE}/:id`,
         method: 'get',
         action: employeeGetByIdAction,
-        requireJwt: true,
+        requireJwt: false,
     },
     {
         path: EMPLOYEE_ROUTE,
@@ -58,13 +59,13 @@ export const AppRoutes = [
         path: LOCATION_ROUTE,
         method: 'get',
         action: locationGetAllAction,
-        requireJwt: true,
+        requireJwt: false,
     },
     {
         path: `${LOCATION_ROUTE}/:id`,
         method: 'get',
         action: locationGetByIdAction,
-        requireJwt: true,
+        requireJwt: false,
     },
     {
         path: LOCATION_ROUTE,
@@ -88,13 +89,13 @@ export const AppRoutes = [
         path: POST_ROUTE,
         method: 'get',
         action: postGetAllAction,
-        requireJwt: true,
+        requireJwt: false,
     },
     {
         path: `${POST_ROUTE}/:id`,
         method: 'get',
         action: postGetByIdAction,
-        requireJwt: true,
+        requireJwt: false,
     },
     {
         path: POST_ROUTE,
@@ -124,7 +125,7 @@ export const AppRoutes = [
         path: '/images',
         method: 'get',
         action: imagesGetAllNames,
-        requireJwt: true,
+        requireJwt: false,
     },
     {
         path: '/authenticate',
@@ -142,6 +143,12 @@ export const AppRoutes = [
         path: '/signup',
         method: 'post',
         action: createUserAction,
+        requireJwt: false,
+    },
+    {
+        path: '/newsletter',
+        method: 'post',
+        action: newsletterPostAction,
         requireJwt: false,
     }
 ];
