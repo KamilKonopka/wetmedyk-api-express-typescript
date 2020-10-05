@@ -19,6 +19,7 @@ import { authenticateAction } from "./controller/AuthenticateAction";
 import { authenticateGetSession } from "./controller/AuthenticateGetSession";
 import { createUserAction } from "./controller/CreateUserAction";
 import { newsletterPostAction } from "./controller/NewsletterPostAction";
+import { newsletterDeleteByIdAction } from "./controller/NewsletterDeleteByIdAction";
 
 const EMPLOYEE_ROUTE = '/employees';
 const LOCATION_ROUTE = '/locations';
@@ -150,5 +151,11 @@ export const AppRoutes = [
         method: 'post',
         action: newsletterPostAction,
         requireJwt: false,
-    }
+    },
+    {
+        path: '/newsletter',
+        method: 'delete',
+        action: newsletterDeleteByIdAction,
+        requireJwt: false,
+    },
 ];
