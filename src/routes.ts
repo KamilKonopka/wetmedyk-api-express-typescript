@@ -1,161 +1,154 @@
-import { employeeGetAllAction } from "./controller/EmployeeGetAllAction.js";
-import { employeeGetByIdAction } from "./controller/EmployeeGetByIdAction.js";
-import { employeePostAction } from "./controller/EmployeePostAction.js";
-import { employeeDeleteByIdAction } from "./controller/EmployeeDeleteByIdAction";
-import { employeePutByIdAction } from "./controller/employeePutByIdAction";
-import { locationGetAllAction } from "./controller/LocationGetAllAction";
-import { locationGetByIdAction } from "./controller/LocationGetByIdAction";
-import { locationPostAction } from "./controller/LocationPostAction";
-import { locationPutById } from "./controller/LocationPutByIdAction";
-import { locationDeleteById } from "./controller/LocationDeleteByIdAction";
-import { postGetAllAction } from "./controller/PostGetAllAction.js";
-import { postGetByIdAction } from "./controller/PostGetByIdAction";
-import { postPostAction } from "./controller/PostPostAction";
-import { postPutByIdAction } from "./controller/PostPutByIdAction";
-import { postDeleteByIdAction } from "./controller/PostDeleteByIdAction";
-import { filePostAction } from "./controller/FilePostAction";
-import { imagesGetAllNames } from "./controller/ImagesGetAllNames";
-import { authenticateAction } from "./controller/AuthenticateAction";
-import { authenticateGetSession } from "./controller/AuthenticateGetSession";
-import { createUserAction } from "./controller/CreateUserAction";
-import { newsletterPostAction } from "./controller/NewsletterPostAction";
-import { newsletterDeleteByIdAction } from "./controller/NewsletterDeleteByIdAction";
+import { EmployeeController } from "./controller/EmployeeController";
+import { PostController } from "./controller/PostController";
+import { LocationController } from "./controller/LocationController";
+import { AuthenticationController } from "./controller/AuthenticationController";
+import { NewsletterController } from "./controller/NewsletterController";
+import { MediaController } from "./controller/MediaController";
+import { UserController } from "./controller/UserController";
 
 const EMPLOYEE_ROUTE = '/employees';
 const LOCATION_ROUTE = '/locations';
 const POST_ROUTE = '/posts';
 
+const employeesController = new EmployeeController();
+const postsController = new PostController();
+const locationsController = new LocationController();
+const authController = new AuthenticationController();
+const newsletterController = new NewsletterController();
+const mediaController = new MediaController();
+const userController = new UserController();
+
 export const AppRoutes = [
     {
         path: EMPLOYEE_ROUTE,
         method: 'get',
-        action: employeeGetAllAction,
+        action: employeesController.getAll,
         requireJwt: false,
     },
     {
         path: `${EMPLOYEE_ROUTE}/:id`,
         method: 'get',
-        action: employeeGetByIdAction,
+        action: employeesController.getById,
         requireJwt: false,
     },
     {
         path: EMPLOYEE_ROUTE,
         method: 'post',
-        action: employeePostAction,
+        action: employeesController.post,
         requireJwt: true,
     },
     {
         path: `${EMPLOYEE_ROUTE}/:id`,
         method: 'delete',
-        action: employeeDeleteByIdAction,
+        action: employeesController.deleteById,
         requireJwt: true,
     },
     {
         path: `${EMPLOYEE_ROUTE}/:id`,
         method: 'put',
-        action: employeePutByIdAction,
+        action: employeesController.putById,
         requireJwt: true,
     },
     {
         path: LOCATION_ROUTE,
         method: 'get',
-        action: locationGetAllAction,
+        action: locationsController.getAll,
         requireJwt: false,
     },
     {
         path: `${LOCATION_ROUTE}/:id`,
         method: 'get',
-        action: locationGetByIdAction,
+        action: locationsController.getById,
         requireJwt: false,
     },
     {
         path: LOCATION_ROUTE,
         method: 'post',
-        action: locationPostAction,
+        action: locationsController.post,
         requireJwt: true,
     },
     {
         path: `${LOCATION_ROUTE}/:id`,
         method: 'put',
-        action: locationPutById,
+        action: locationsController.putById,
         requireJwt: true,
     },
     {
         path: `${LOCATION_ROUTE}/:id`,
         method: 'delete',
-        action: locationDeleteById,
+        action: locationsController.deleteById,
         requireJwt: true,
     },
     {
         path: POST_ROUTE,
         method: 'get',
-        action: postGetAllAction,
+        action: postsController.getAll,
         requireJwt: false,
     },
     {
         path: `${POST_ROUTE}/:id`,
         method: 'get',
-        action: postGetByIdAction,
+        action: postsController.getById,
         requireJwt: false,
     },
     {
         path: POST_ROUTE,
         method: 'post',
-        action: postPostAction,
+        action: postsController.post,
         requireJwt: true,
     },
     {
         path: `${POST_ROUTE}/:id`,
         method: 'put',
-        action: postPutByIdAction,
+        action: postsController.putById,
         requireJwt: true,
     },
     {
         path: `${POST_ROUTE}/:id`,
         method: 'delete',
-        action: postDeleteByIdAction,
+        action: postsController.deleteById,
         requireJwt: true,
     },
     {
         path: '/upload',
         method: 'post',
-        action: filePostAction,
+        action: mediaController.post,
         requireJwt: true,
     },
     {
         path: '/images',
         method: 'get',
-        action: imagesGetAllNames,
+        action: mediaController.getAll,
         requireJwt: false,
     },
     {
         path: '/authenticate',
         method: 'post',
-        action: authenticateAction,
+        action: authController.post,
         requireJwt: false,
     },
     {
         path: '/authenticate',
         method: 'get',
-        action: authenticateGetSession,
+        action: authController.getById,
         requireJwt: true,
     },
     {
         path: '/signup',
         method: 'post',
-        action: createUserAction,
+        action: userController.post,
         requireJwt: false,
     },
     {
         path: '/newsletter',
         method: 'post',
-        action: newsletterPostAction,
+        action: newsletterController.post,
         requireJwt: false,
     },
     {
         path: '/newsletter',
         method: 'delete',
-        action: newsletterDeleteByIdAction,
+        action: newsletterController.deleteById,
         requireJwt: false,
     },
 ];

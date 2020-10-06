@@ -5,8 +5,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import debug from 'debug';
-import Joi from 'joi';
 import * as _ from 'lodash';
 import { AppRoutes } from "./routes.js";
 import { createConnection } from "typeorm";
@@ -27,8 +25,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(bodyParser.json());
-// app.use(requireJwtMiddleware);
-
 
 createConnection().then(async connection => {
     AppRoutes.forEach((route) => {
@@ -48,7 +44,7 @@ if (app.get('env') === 'development') {
     console.log('Morgan enabled...');
 }
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.send('WetMedyk Rest API');
 });
 
