@@ -16,9 +16,9 @@ export class NewsletterController implements Controller {
             const emailController = new EmailSender();
             await emailController.sendEmail(req.body.email, 'Successful Newsletter Subscription');
 
-            return res.status(200).send({message: `Email address: ${req.body.email} has been successfully added to database.`});
+            return res.status(200).send({message: `Email address: ${req.body.email} has been successfully added to database.`, status: 200});
         } else {
-            return res.status(400).send({message: `Email address: ${req.body.email} already exists.`});
+            return res.status(200).send({message: `Email address: ${req.body.email} already exists.`, status: 400});
         }
     }
 
