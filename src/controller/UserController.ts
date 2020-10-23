@@ -26,4 +26,37 @@ export class UserController implements Controller {
             res.send(newUser);
         }
     }
+
+    async getAll(req: Request, res: Response) {
+        const repository = getManager().getRepository(User);
+        const users = await repository.find();
+
+        res.status(200).send(users);
+    }
+
+    async getById(req: Request, res: Response) {
+        const repository = getManager().getRepository(User);
+        const user = await repository.findOne(req.body.id);
+
+        res.status(200).send(user);
+    }
+
+    async deleteById(req: Request, res: Response) {
+        const repository = getManager().getRepository(User);
+        const user = await repository.findOne({ where: { email: req.body.email } });
+
+        await repository.delete(user);
+
+        res.status(200).send(user);
+    }
+
+    async putById(req: Request, res: Response) {
+        const repository = getManager().getRepository(User);
+        const user = await repository.findOne(req.params.id);
+        repository.merge(user, req.body);
+
+        await repository.save(user);
+
+        res.status(200).send(user);
+    }
 }
