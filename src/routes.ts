@@ -140,6 +140,18 @@ export const AppRoutes = [
         requireJwt: false,
     },
     {
+        path: '/users',
+        method: 'get',
+        action: userController.getAll,
+        requireJwt: true,
+    },
+    {
+        path: '/users/:id',
+        method: 'get',
+        action: userController.getById,
+        requireJwt: true,
+    },
+    {
         path: '/newsletter',
         method: 'post',
         action: newsletterController.post,
