@@ -14,14 +14,14 @@ export const requireJwtMiddleware = async (req: Request, res: Response, next: Ne
 
     const requestHeader = "Authorization";
     const responseHeader = "X-Renewed-JWT-Token";
-    const [bearer, token] = req.header(requestHeader).split(' ');
+    const [bearer, tokenJWT] = req.header(requestHeader).split(' ');
 
-    if (!token) {
+    if (!tokenJWT) {
         unauthorized(`Required ${requestHeader} header not found`);
         return;
     }
 
-    const decodedSession: DecodeResult = decodeSession(SECRET_KEY, token);
+    const decodedSession: DecodeResult = decodeSession(SECRET_KEY, tokenJWT);
 
     if (decodedSession.type === 'integrity-error' || decodedSession.type === 'invalid-token') {
         unauthorized(`Failed to decode or validate authorization token. Reason: ${decodedSession.type}`);
