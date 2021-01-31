@@ -15,7 +15,7 @@ import env from 'env-var';
 dotenv.config();
 
 const app = express();
-const port = process.env.SERVER_PORT || 8080;
+const port = process.env.PORT || 8080;
 export const imagePath = 'public/images';
 export const SECRET_KEY = env.get('SECRET_KEY').required().asString();
 
