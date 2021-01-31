@@ -122,6 +122,12 @@ export const AppRoutes = [
         requireJwt: false,
     },
     {
+        path: '/images/:id',
+        method: 'delete',
+        action: mediaController.deleteById,
+        requireJwt: true,
+    },
+    {
         path: '/authenticate',
         method: 'post',
         action: authController.post,

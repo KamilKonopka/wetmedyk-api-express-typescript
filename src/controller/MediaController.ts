@@ -31,11 +31,11 @@ const options = {
 const upload = multer(options).single('file');
 
 export class MediaController implements Controller {
-    forbiddenFileNames: string[] = ['.gitkeep'];
 
     async getAll(request: Request, response: Response) {
+        const forbiddenFileNames: string[] = ['.gitkeep', '.DS_Store'];
         fs.readdir(imagePath, (err, files: string[]) => {
-            const fileNames = files.filter(file => !this.forbiddenFileNames.includes(file));
+            const fileNames = (files || []).filter(file => !forbiddenFileNames.includes(file));
             response.send(fileNames);
         })
     }
@@ -55,5 +55,14 @@ export class MediaController implements Controller {
             }
             return response.status(200).send(request.file)
         })
+    }
+
+    async deleteById(request: Request, response: Response): Promise<any> {
+        await fs.unlink(`${imagePath}/${request.params.id}`, (err) => {
+            if (err) {
+                return response.status(404).send({ message: err.message });
+            }
+            return response.status(200).send(request.params.id);
+        });
     }
 }
