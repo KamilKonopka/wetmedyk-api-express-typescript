@@ -169,4 +169,10 @@ export const AppRoutes = [
         action: newsletterController.deleteById,
         requireJwt: false,
     },
+    {
+        path: '/users/:id',
+        method: 'delete',
+        action: userController.deleteById,
+        requireJwt: true,
+    },
 ];

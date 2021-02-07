@@ -43,7 +43,7 @@ export class UserController implements Controller {
 
     async deleteById(req: Request, res: Response) {
         const repository = getManager().getRepository(User);
-        const user = await repository.findOne({ where: { email: req.body.email } });
+        const user = await repository.findOne({ where: { id: req.params.id } });
 
         await repository.delete(user);
 
