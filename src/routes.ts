@@ -5,10 +5,12 @@ import { AuthenticationController } from "./controller/AuthenticationController"
 import { NewsletterController } from "./controller/NewsletterController";
 import { MediaController } from "./controller/MediaController";
 import { UserController } from "./controller/UserController";
+import {ServiceController} from "./controller/ServiceController";
 
 const EMPLOYEE_ROUTE = '/employees';
 const LOCATION_ROUTE = '/locations';
 const POST_ROUTE = '/posts';
+const SERVICE_PATH = '/services';
 
 const employeesController = new EmployeeController();
 const postsController = new PostController();
@@ -17,6 +19,7 @@ const authController = new AuthenticationController();
 const newsletterController = new NewsletterController();
 const mediaController = new MediaController();
 const userController = new UserController();
+const serviceController = new ServiceController();
 
 export const AppRoutes = [
     {
@@ -173,6 +176,36 @@ export const AppRoutes = [
         path: '/users/:id',
         method: 'delete',
         action: userController.deleteById,
+        requireJwt: true,
+    },
+    {
+        path: SERVICE_PATH,
+        method: 'get',
+        action: serviceController.getAll,
+        requireJwt: false,
+    },
+    {
+        path: `${SERVICE_PATH}/:id`,
+        method: 'get',
+        action: serviceController.getById,
+        requireJwt: false,
+    },
+    {
+        path: SERVICE_PATH,
+        method: 'post',
+        action: serviceController.post,
+        requireJwt: true,
+    },
+    {
+        path: `${SERVICE_PATH}/:id`,
+        method: 'put',
+        action: serviceController.putById,
+        requireJwt: true,
+    },
+    {
+        path: `${SERVICE_PATH}/:id`,
+        method: 'delete',
+        action: serviceController.deleteById,
         requireJwt: true,
     },
 ];
