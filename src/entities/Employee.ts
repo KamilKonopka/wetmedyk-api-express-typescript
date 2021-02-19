@@ -5,14 +5,10 @@ import { IEmployee } from "../models/employee.model";
 export class Employee implements IEmployee {
 
     @PrimaryGeneratedColumn() id: number;
-
     @Column() firstName: string;
-
     @Column() lastName: string;
-
     @Column() description: string;
-
     @Column() photo: string;
-
     @Column() title: string;
+    @Column() order: number | null;
 }
