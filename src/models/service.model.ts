@@ -3,6 +3,6 @@ export interface IService {
     title: string;
     image: string;
     description: string;
-    details: string;
-    available: string;
+    details: string[];
+    available: number[];
 }

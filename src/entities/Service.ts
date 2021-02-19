@@ -7,6 +7,6 @@ export class Service implements IService {
     @Column() title: string;
     @Column() image: string;
     @Column() description: string;
-    @Column() details: string;
-    @Column() available: string;
+    @Column('text', { array: true }) details: string[];
+    @Column('int', { array: true }) available: number[];
 }
