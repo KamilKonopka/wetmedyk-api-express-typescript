@@ -5,7 +5,7 @@ import {IService} from "../models/service.model";
 export class Service implements IService {
     @PrimaryGeneratedColumn() id: number;
     @Column() title: string;
-    @Column() image: string;
+    @Column() icon: string;
     @Column() description: string;
     @Column('text', { array: true }) details: string[];
     @Column('int', { array: true }) available: number[];
