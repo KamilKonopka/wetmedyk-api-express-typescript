@@ -4,8 +4,9 @@ import { Post } from "../entities/Post";
 
 export class PostController {
     async getAll(request: Request, response: Response) {
+        const queryParams = request.query || {};
         const repository: Repository<Post> = getManager().getRepository(Post);
-        const posts = await repository.find({ order: { date: "DESC" } });
+        const posts = await repository.find({ order: { date: "DESC" }, where: queryParams });
         response.send(posts);
     }
 
