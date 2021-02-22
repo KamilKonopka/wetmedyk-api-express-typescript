@@ -9,4 +9,5 @@ export class Service implements IService {
     @Column() description: string;
     @Column('text', { array: true }) details: string[];
     @Column('int', { array: true }) available: number[];
+    @Column() order: number;
 }

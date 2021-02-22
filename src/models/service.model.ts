@@ -5,4 +5,5 @@ export interface IService {
     description: string;
     details: string[];
     available: number[];
+    order: number;
 }
