@@ -42,7 +42,7 @@ export class MediaController implements Controller {
 
             s3.upload(s3Params, (err: Error, data: any) => {
                 if (data) {
-                    return response.status(200).send({ filename: data.Location });
+                    return response.status(200).send({ filename: data.Key });
                 }
                 return new Error('Failed to upload image');
             })
