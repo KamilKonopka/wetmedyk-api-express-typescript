@@ -27,7 +27,7 @@ export class MediaController implements Controller {
     }
 
     async post(request: Request, response: Response): Promise<any> {
-        request.busboy.on('file', (fieldName: string, file: ReadableStream, filename: string, encoding: string, mimetype: string) => {
+        request.busboy.on('file', (fieldName: string, file: ReadableStream, { filename, encoding, mimetype }: { filename: string, encoding: string, mimetype: string }) => {
             aws.config.update({ region: 'eu-central-1' });
 
             const s3 = new aws.S3();
